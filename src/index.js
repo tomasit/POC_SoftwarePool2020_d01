@@ -9,6 +9,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+
 const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -19,11 +20,12 @@ function startServer() {
     res.send('world');
   });
   app.get('/repeat-my-fixed', (req, res) => {
-    res.send('for better and for worst\n'.repeat(200));
+    res.send('for better and for worst\n');
+    res.status(200);
   });
   app.get('/repeat-my-query', (req, res) => {
     const { message } = req.query;
-    if (message == null || message.length === 0) {
+    if (message == null || message === 0) {
       res.status(400);
       res.send('Bad Request');
     } else {
