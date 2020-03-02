@@ -9,10 +9,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-
 const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
+require('dotenv').config();
 
 function startServer() {
   app.get('/hello', (req, res) => {
@@ -52,8 +52,7 @@ function startServer() {
   });
   app.get('/repeat-my-cookie', (req, res) => {
     const cookie = req.cookies;
-    var elem = Object.values(cookie)[Object.keys(cookie).indexOf('message')];
-    console.log(elem);
+    const elem = Object.values(cookie)[Object.keys(cookie).indexOf('message')];
     if (elem == null || elem === '') {
       res.status(400);
       res.send('Bad Request');
@@ -61,8 +60,9 @@ function startServer() {
       res.send(elem);
     }
   });
-    app.get('/repeat-my-param/:message', (req, res) => {
-});
+  app.get('/repeat-my-param/:message', (req, res) => {
+    res.send(req.params.message);
+  });
   app.listen(8080);
 }
 startServer();
