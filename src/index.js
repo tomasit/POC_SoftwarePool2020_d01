@@ -20,7 +20,7 @@ function startServer() {
     res.send('world');
   });
   app.get('/repeat-my-fixed', (req, res) => {
-    res.send('for better and for worst\n');
+    res.send('For better and for worst\n');
     res.status(200);
   });
   app.get('/repeat-my-query', (req, res) => {
