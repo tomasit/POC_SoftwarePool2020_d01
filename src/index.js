@@ -16,6 +16,7 @@ app.use(cookieParser());
 require('dotenv').config();
 
 function startServer() {
+  console.log('Ready');
   app.get('/hello', (req, res) => {
     res.send('world');
   });
@@ -62,9 +63,6 @@ function startServer() {
       res.send(elem);
     }
   });
-  app.get('/repeat-my-param/:message', (req, res) => {
-    res.send(req.params.message);
-  });
-    app.listen(8080);
+  app.listen(8080);
 }
 startServer();
