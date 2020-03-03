@@ -26,7 +26,7 @@ function startServer() {
   });
   app.get('/repeat-my-query', (req, res) => {
     const { message } = req.query;
-    if (message == null || message === 0) {
+    if (message == null || message.lenght === 0) {
       res.status(400);
       res.send('Bad Request');
     } else {
@@ -61,6 +61,23 @@ function startServer() {
       res.send('Bad Request');
     } else {
       res.send(elem);
+    }
+  });
+  app.get('/repeat-all-my-queries', (req, res) => {
+    const message = req.query;
+    let tab = [];
+      if (message != null) {
+        for (let i = 0; Object.values(message)[i] && Object.keys(message)[i]; i += 1) {
+          let tab2 = {
+            key: Object.keys(message)[i],
+            value: Object.values(message)[i],
+          };
+          tab.push(tab2);
+        }
+      res.send(tab);
+    } else {
+      res.status(400);
+      res.send('Bad Request');
     }
   });
   app.listen(8080);
